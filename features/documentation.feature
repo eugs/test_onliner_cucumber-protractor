@@ -9,7 +9,7 @@ Feature: Example feature
 #    When I click on "Каталог"
 #    Then I should see "Running specific features"
 
-Scenario: Searching for first phone
+Scenario: Searching for iPhones
     Given I am on the Onliner page
     Then I should see the title "Onliner.by"
 
@@ -19,7 +19,7 @@ Scenario: Searching for first phone
     When I choose "Apple"
     Then I should see the tag "Apple"
 
-      When I click on "Apple iPhone 6 16GB Space Gray"
+      When I find "Apple iPhone 6 16GB Space Gray"
       Then I should see the title "Смартфон Apple iPhone 6 16GB Space Gray купить в Минске"
 
     When I add to comparison
@@ -32,7 +32,7 @@ Scenario: Searching for first phone
     When I choose "Apple"
     Then I should see the tag "Apple"
 
-      When I click on "Apple iPhone SE 16GB Space Gray"
+      When I find "Apple iPhone SE 16GB Space Gray"
       Then I should see the title "Смартфон Apple iPhone SE 16GB Space Gray купить в Минске"
 
     When I add to comparison

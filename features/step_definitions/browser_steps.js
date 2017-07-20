@@ -38,55 +38,44 @@ defineSupportCode(function({Given, When, Then}) {
   });
 
   When('I click on {stringInDoubleQuotes}', function (text) {
-    // return this.browser.element(by.cssContainingText('.project-navigation__sign', text)).click();
-    var condition = this.browser.element(by.linkText(text));
-
-    this.browser.wait(EC.presenceOf(condition), 5000)
-      .then( ()=> {
-        return this.browser.element(by.linkText(text)).click();
-    })
-
-    // this.browser.sleep(3000);
-    // return this.browser.findElement({linkText: text}).then(function(element) {
-    //   return element.click();
-    // });
-
+    var element = this.browser.element(by.linkText(text));
+		this.browser.wait(EC.elementToBeClickable(element), 8000)
+      .then(()=> {
+        return element.click();
+      })
+		// this.browser.executeScript("arguments[0].scrollIntoView();", element);
   });
+
+  When('I find {stringInDoubleQuotes}', function(text) {
+		var element = this.browser.element(by.cssContainingText('span', text));
+		this.browser.wait(EC.elementToBeClickable(element), 5000);
+		this.browser.executeScript("arguments[0].scrollIntoView();", element);
+		return element.click();
+	});
+
 
   When('I add to comparison', function () {
     // var condition = EC.visibilityOf(this.browser.element(by.css('#product-compare-control')));
     // this.browser.wait(condition, 5000);
-    //
-    // this.browser.executeScript("arguments[0].scrollIntoView();", this.browser.element(by.css('#product-compare-control')));
-    //
     //  return this.browser.element(by.css('#product-compare-control')).click();
-
-    this.browser.$('.catalog-masthead-controls__item.catalog-masthead-controls__item_compare').click();
+    this.browser.$('#product-compare-control').click();
+    // this.browser.$('.catalog-masthead-controls__item.catalog-masthead-controls__item_compare').click();
   });
 
   When('I see the comparison', function () {
     this.browser.$('.compare-button__sub.compare-button__sub_main').click()
-      // .then( ()=> {
-        // this.browser.$('title').getText()
         this.browser.getTitle()
       .then(function (title) {
         console.log("TITLE: ", title);
-      // })
     })
   });
 
   When('I choose {stringInDoubleQuotes}', function (text) {
-    // var loc = '#schema-filter > div:nth-child(1) > div:nth-child(3) > div.schema-filter__facet > ul > li:nth-child(4) > label > span.schema-filter__checkbox-text';
-
     var cb = this.browser.element.all(by.cssContainingText('span', text)).first();
-
-    // var cb = this.browser.element(by.css(loc));
     this.browser.driver.executeScript("arguments[0].scrollIntoView();", cb.getWebElement())
       .then(()=> {
         return cb.click();
       });
-
-    // var elm = element.all(by.css('.item.item-complex')).get(9);
   });
 
   Then('notification panel should say {stringInDoubleQuotes}', function (msg) {
@@ -114,7 +103,10 @@ defineSupportCode(function({Given, When, Then}) {
 
   Then('I should see the tag {stringInDoubleQuotes}', function (tag) {
 
-    var condition = EC.presenceOf(this.browser.$('.schema-tags__text'));
+    // var condition = EC.presenceOf(this.browser.$('.schema-tags__text'));
+
+    var condition = EC.elementToBeClickable(this.browser.$('.schema-tags__text'));
+
     this.browser.wait(condition, 8000);
     //TODO add tag search
     // var tags = this.browser.$$('.schema-tags__text');
