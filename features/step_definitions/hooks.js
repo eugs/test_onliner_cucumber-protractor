@@ -3,7 +3,7 @@ var {defineSupportCode} = require('cucumber');
 
 defineSupportCode(function({After}) {
   After(function() {
-    console.log("After");
+    // console.log("After");
     return this.browser.driver.quit();
   });
 });
