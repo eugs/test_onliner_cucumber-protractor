@@ -28,12 +28,7 @@ defineSupportCode(function({Given, When, Then}) {
   When('I find and click {stringInDoubleQuotes}', function(text) {
     // idk
     this.browser.sleep(2000);
-
-		var element = this.browser.element(by.cssContainingText('span', text));
-    // this.browser.wait(EC.presenceOf(element), 8000).then(()=> {
-    //     this.browser.executeScript("arguments[0].scrollIntoView();", element);
-    //     return element.click();
-    // })
+	  var element = this.browser.element(by.cssContainingText('span', text));
     return waitAndClick(this, element);
 	});
 
@@ -46,9 +41,6 @@ defineSupportCode(function({Given, When, Then}) {
 
   When('I add to comparison', function () {
     var element = this.browser.$('#product-compare-control');
-    // this.browser.wait(EC.presenceOf(element), 5000).then(()=> {
-    //   return element.click();
-    // })
     return waitAndClick(this, element);
   });
 
@@ -73,10 +65,7 @@ defineSupportCode(function({Given, When, Then}) {
 
   When('I check the comparison page', function () {
     var element = this.browser.$('.compare-button__sub.compare-button__sub_main');
-    // this.browser.wait(EC.presenceOf(element, 5000)).then(()=> {
-    //     return element.click();
-    //   })
-      return waitAndClick(this, element);
+    return waitAndClick(this, element);
   });
 
   When('I choose {stringInDoubleQuotes} checkbox', function (text) {
