@@ -16,11 +16,11 @@ Scenario: Searching for iPhones
     When I click on "Каталог"
     When I click on "Мобильные телефоны"
     Then I should see the title "Мобильный телефон купить в Минске"
-    When I choose "Apple"
+    When I choose "Apple" checkbox
     Then I should see the tag "Apple"
 
-      When I find "Apple iPhone 6 16GB Space Gray"
-      Then I should see the title "Смартфон Apple iPhone 6 16GB Space Gray купить в Минске"
+      When I find and click "Apple iPhone 6s 16GB Silver"
+      Then I should see the title "Смартфон Apple iPhone 6s 16GB Silver купить в Минске"
 
     When I add to comparison
     Then notification panel should say "1 товар в сравнении"
@@ -29,17 +29,25 @@ Scenario: Searching for iPhones
     When I click on "Каталог"
     When I click on "Мобильные телефоны"
     Then I should see the title "Мобильный телефон купить в Минске"
-    When I choose "Apple"
+    When I choose "Apple" checkbox
     Then I should see the tag "Apple"
 
-      When I find "Apple iPhone SE 16GB Space Gray"
+      When I find and click "Apple iPhone SE 16GB Space Gray"
       Then I should see the title "Смартфон Apple iPhone SE 16GB Space Gray купить в Минске"
 
     When I add to comparison
     Then notification panel should say "2 товара в сравнении"
 
-    When I see the comparison
-    Then I should see the title "Сравнить Apple iPhone SE 32GB Space Gray, Apple iPhone 6s 32GB Space Gray"
+    When I check the comparison page
+    Then I should see the title "Сравнить Apple iPhone 6s 16GB Silver, Apple iPhone SE 16GB Space Gray"
+    Then I compare first is better
+
+    #----------------------
+
+    When I delete comparisons
+    Then I should see the title "Каталог Onliner.by"
+
+
 
   #  When I choose "32 ГБ"
   #  Then I should see the tag "32 ГБ"
