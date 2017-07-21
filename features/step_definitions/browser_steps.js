@@ -27,7 +27,9 @@ defineSupportCode(function({Given, When, Then}) {
   });
 
   When('I find and click {stringInDoubleQuotes}', function(text) {
+    // idk
     this.browser.sleep(2000);
+
 		var element = this.browser.element(by.cssContainingText('span', text));
     this.browser.wait(EC.presenceOf(element), 8000).then(()=> {
         this.browser.executeScript("arguments[0].scrollIntoView();", element);

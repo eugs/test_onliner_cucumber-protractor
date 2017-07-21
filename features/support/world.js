@@ -1,4 +1,3 @@
-// features/support/world.js
 require('geckodriver')
 var seleniumWebdriver = require('selenium-webdriver');
 var {defineSupportCode} = require('cucumber');
@@ -14,7 +13,7 @@ function CustomWorld() {
   this.browser = new protractor.ProtractorBrowser(driver.build());
   this.browser.plugins_ = new plugins_1.Plugins({});
   this.browser.ignoreSynchronization = true;
-  
+
 }
 
 defineSupportCode(function({setWorldConstructor}) {
