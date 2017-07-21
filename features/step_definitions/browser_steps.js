@@ -20,8 +20,7 @@ defineSupportCode(function({Given, When, Then}) {
 
   When('I click on {stringInDoubleQuotes}', function (text) {
     var element = this.browser.element(by.linkText(text));
-		this.browser.wait(EC.elementToBeClickable(element), 5000)
-      .then(()=> {
+		this.browser.wait(EC.elementToBeClickable(element), 5000).then(()=> {
         return element.click();
       })
   });
@@ -31,25 +30,26 @@ defineSupportCode(function({Given, When, Then}) {
     this.browser.sleep(2000);
 
 		var element = this.browser.element(by.cssContainingText('span', text));
-    this.browser.wait(EC.presenceOf(element), 8000).then(()=> {
-        this.browser.executeScript("arguments[0].scrollIntoView();", element);
-        return element.click();
-    })
+    // this.browser.wait(EC.presenceOf(element), 8000).then(()=> {
+    //     this.browser.executeScript("arguments[0].scrollIntoView();", element);
+    //     return element.click();
+    // })
+    return waitAndClick(this, element);
 	});
 
   When('I delete comparisons', function () {
-    del_btn = this.browser.$('a[class="product-table__clear button button_small button_gray"]');
-    del_btn.click()
-    .then(()=> {
+    var del_btn = this.browser.$('a[class="product-table__clear button button_small button_gray"]');
+    del_btn.click().then(()=> {
       return console.log("deleted");
     })
   });
 
   When('I add to comparison', function () {
     var element = this.browser.$('#product-compare-control');
-    this.browser.wait(EC.presenceOf(element), 5000).then(()=> {
-      return element.click();
-    })
+    // this.browser.wait(EC.presenceOf(element), 5000).then(()=> {
+    //   return element.click();
+    // })
+    return waitAndClick(this, element);
   });
 
   Then('I compare first is better', function () {
@@ -73,9 +73,10 @@ defineSupportCode(function({Given, When, Then}) {
 
   When('I check the comparison page', function () {
     var element = this.browser.$('.compare-button__sub.compare-button__sub_main');
-    this.browser.wait(EC.presenceOf(element, 5000)).then(()=> {
-        return element.click();
-      })
+    // this.browser.wait(EC.presenceOf(element, 5000)).then(()=> {
+    //     return element.click();
+    //   })
+      return waitAndClick(this, element);
   });
 
   When('I choose {stringInDoubleQuotes} checkbox', function (text) {
@@ -88,17 +89,24 @@ defineSupportCode(function({Given, When, Then}) {
 
   Then('notification panel should say {stringInDoubleQuotes}', function (msg) {
       var panel = this.browser.$('.compare-button__sub.compare-button__sub_main');
-        return panel.getText()
-          .then((text)=> {
+        return panel.getText().then((text)=> {
             console.log("panel text: ", text);
             assert.equal(text, msg, "Panel text is wrong: "+text);
-          })
+        })
   });
 
   Then('I should see the tag {stringInDoubleQuotes}', function (tag) {
     var condition = EC.elementToBeClickable(this.browser.$('.schema-tags__text'));
-    //TODO add tag search
     return this.browser.wait(condition, 5000);
   });
+
+  // ----------------------
+
+  function waitAndClick(context, element) {
+    var fakeThis = context;
+    fakeThis.browser.wait(EC.presenceOf(element, 5000)).then(()=> {
+      return element.click();
+    })
+  }
 
 });
