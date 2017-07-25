@@ -14,7 +14,7 @@ defineSupportCode(function({Given, When, Then}) {
 
   Then('I should see the title {stringInDoubleQuotes}', function (text) {
     return this.browser.getTitle().then((title)=> {
-        assert.equal(title, text)
+        assert.equal(title, text);
       })
   });
 
@@ -26,11 +26,11 @@ defineSupportCode(function({Given, When, Then}) {
   });
 
   When('I find and click {stringInDoubleQuotes}', function(text) {
-    // idk
+    // idk it helps
     this.browser.sleep(2000);
-	  var element = this.browser.element(by.cssContainingText('span', text));
-    return waitAndClick(this, element);
-	});
+    var myElement = this.browser.element(by.cssContainingText('span', text))
+    return waitAndClick(this, myElement);
+  	});
 
   When('I delete comparisons', function () {
     var del_btn = this.browser.$('a[class="product-table__clear button button_small button_gray"]');
@@ -56,7 +56,7 @@ defineSupportCode(function({Given, When, Then}) {
 		.then(() => {
 			this.browser.$$(second_loc).count().then((res) => {
 				second = res;
-			})
+			});
 		})
 		.then(() => {
 			return assert.isAbove(first, second, 'something is wrong, the first phone should be better!');
@@ -81,7 +81,7 @@ defineSupportCode(function({Given, When, Then}) {
         return panel.getText().then((text)=> {
             console.log("panel text: ", text);
             assert.equal(text, msg, "Panel text is wrong: "+text);
-        })
+        });
   });
 
   Then('I should see the tag {stringInDoubleQuotes}', function (tag) {
@@ -95,7 +95,7 @@ defineSupportCode(function({Given, When, Then}) {
     var fakeThis = context;
     fakeThis.browser.wait(EC.presenceOf(element, 5000)).then(()=> {
       return element.click();
-    })
+    });
   }
 
 });
